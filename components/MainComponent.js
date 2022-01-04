@@ -13,4 +13,13 @@ class Main extends Component {
             restaurantList: []
         }
     }
+    render() {
+        return (
+            <View>
+                <TouchableOpacity>
+                    <Text>Find Veggies</Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
 }
