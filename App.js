@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
-import Constants from 'expo-constants';
 
 export default class App extends Component {
   constructor(props) {
@@ -14,6 +13,16 @@ export default class App extends Component {
         restaurantList: []
     }
 }
+
+async getLocationAsync() {
+  //The keyword await is used to wait for the activity which here is a promise of fetching data from remote server.
+  //asks for permission to use location
+  const { status } = await Permissions.askAsync(
+    //grab data while app runs in foreground
+    Permissions.LOCATION_FOREGROUND
+  );
+}
+
 render() {
     return (
         <View style={styles.container}>
