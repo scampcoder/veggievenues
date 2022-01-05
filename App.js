@@ -54,9 +54,9 @@ export default class App extends Component {
             <FlatList
               data={this.state.restaurantList.results}
               keyExtractor={(item) => item.place_id}
-              renderItem={({item}) => {
+              renderItem={({item}) => (
                 <Text>{item.name}</Text>
-              }}
+              )}
               style={styles.listName}
             />
             <Pressable onPress={() => this.handleRestaurantSearch()}>
