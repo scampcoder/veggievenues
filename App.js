@@ -55,12 +55,22 @@ handleRestaurantSearch = () => {
     .then(result => this.setState({restaurantList: result}))
 }
 
+
 render() {
+  const renderRestaurantItem = ({item}) => {
+    <Text>{item.name}</Text>
+  }
     return (
         <View style={styles.container}>
-            <TouchableOpacity >
-                <Text style={styles.search}>Find Veggies</Text>
-            </TouchableOpacity>
+          <FlatList
+            data={this.state.restaurantList.results}
+            keyExtractor={(item) => item.place_id}
+            renderItem={renderRestaurantItem}
+            style={styles.listName}
+          />
+          <TouchableOpacity>
+              <Text style={styles.search}>Find Veggies</Text>
+          </TouchableOpacity>
         </View>
     )
   }
@@ -74,11 +84,16 @@ container: {
     justifyContent: 'center',
     
 },
+listName: {
+  backgroundColor: '#F23CA1', 
+  width: '80%', 
+  margin: 60, 
+  padding: 5
+},
 search: {
     backgroundColor: '#F23CA1',
     textAlign: 'center',
-    padding: 20, 
-    marginTop: 50,
+    padding: 20,
     fontSize: 20,
     color: 'white'
 }
