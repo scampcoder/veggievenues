@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Pressable } from 'react-native';
 import * as Location from 'expo-location';
 
 export default class App extends Component {
@@ -58,9 +58,9 @@ render() {
             }}
             style={styles.listName}
           />
-          <TouchableOpacity onPress={() => this.handleRestaurantSearch()}>
+          <Pressable onPress={() => this.handleRestaurantSearch()}>
               <Text style={styles.search}>Find Veggies</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
     )
   }
