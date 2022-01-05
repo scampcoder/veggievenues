@@ -11,6 +11,10 @@ export default class App extends Component {
       restaurantList: []
   }
 
+componentDidMount() {
+  this.getLocationAsync();
+}
+
 async getLocationAsync() {
   //The keyword await is used to wait for the activity which here is a promise of fetching data from remote server.
   //asks for permission to use location
@@ -56,15 +60,14 @@ handleRestaurantSearch = () => {
 render() {
   //testing
   console.log(this.state.restaurantList);
-  const renderRestaurantItem = ({item}) => {
-    <Text>{item.name}</Text>
-  }
     return (
         <View style={styles.container}>
           <FlatList
             data={this.state.restaurantList.results}
             keyExtractor={(item) => item.place_id}
-            renderItem={renderRestaurantItem}
+            renderItem={({item}) => {
+              <Text>{item.name}</Text>
+            }}
             style={styles.listName}
           />
           <TouchableOpacity onPress={() => this.handleRestaurantSearch()}>
