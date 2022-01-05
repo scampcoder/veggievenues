@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 import * as Location from 'expo-location';
-import * as Permissions from 'expo-permissions';
 
 export default class App extends Component {
   state = {
@@ -16,23 +15,12 @@ componentDidMount() {
 }
 
 async getLocationAsync() {
-  //The keyword await is used to wait for the activity which here is a promise of fetching data from remote server.
-  //asks for permission to use location
-  const { status } = await Permissions.askAsync(
-    //grab data while app runs in foreground
-    Permissions.LOCATION_FOREGROUND
-  );
-  if(status === 'granted') {
-    //grab location data
-    let location = await Location.getCurrentPositionAsync({});
-    this.setState({
-        hasLocationPermission: true,
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-    });
-  } else {
-    alert('Location permission not granted');
-  }
+  let location = await Location.getCurrentPositionAsync({});
+  this.setState({
+      hasLocationPermission: true,
+      latitude: location.coords.latitude,
+      longitude: location.coords.longitude,
+  });
 };
 
 handleRestaurantSearch = () => {
