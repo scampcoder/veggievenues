@@ -4,15 +4,12 @@ import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-        hasLocationPermission: false,
-        latitude: 0,
-        longitude: 0,
-        restaurantList: []
-    }
-}
+  state = {
+      hasLocationPermission: false,
+      latitude: 0,
+      longitude: 0,
+      restaurantList: []
+  }
 
 async getLocationAsync() {
   //The keyword await is used to wait for the activity which here is a promise of fetching data from remote server.
@@ -40,7 +37,7 @@ handleRestaurantSearch = () => {
   //add user's location to state lat & long
   const location = `location=${this.state.latitude},${this.state.longitude}`;
   //radius of search in meters
-  const radius = '&radius=500';
+  const radius = '&radius=200';
   //type of search
   const type = '&keyword=restaurant';
   //our API key
@@ -57,6 +54,8 @@ handleRestaurantSearch = () => {
 
 
 render() {
+  //testing
+  console.log(this.state.restaurantList);
   const renderRestaurantItem = ({item}) => {
     <Text>{item.name}</Text>
   }
@@ -68,7 +67,7 @@ render() {
             renderItem={renderRestaurantItem}
             style={styles.listName}
           />
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => this.handleRestaurantSearch()}>
               <Text style={styles.search}>Find Veggies</Text>
           </TouchableOpacity>
         </View>
