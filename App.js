@@ -21,6 +21,17 @@ async getLocationAsync() {
     //grab data while app runs in foreground
     Permissions.LOCATION_FOREGROUND
   );
+  if(status === 'granted') {
+    //grab location data
+    let location = await Location.getCurrentPositionAsync({});
+    this.setState({
+        hasLocationPermission: true,
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+    });
+  } else {
+    alert('Location permission not granted');
+  }
 }
 
 render() {
